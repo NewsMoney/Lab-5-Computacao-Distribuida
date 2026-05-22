@@ -1,0 +1,33 @@
+name: Atividade 2 - MPI Reduce
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  test-mpi-reduce:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Instalar MPI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mpich
+
+      - name: Compilar programa
+        run: |
+          mpicc media_mpi.c -o media_mpi
+
+      - name: Executar teste MPI
+        run: |
+          mpirun -np 4 ./media_mpi 1000
