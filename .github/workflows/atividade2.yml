@@ -12,7 +12,7 @@ on:
       - master
 
 jobs:
-  test-mpi-reduce:
+  test-mpi:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,10 +24,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y mpich
 
+      - name: Listar arquivos do repositório
+        run: |
+          find .
+
       - name: Compilar programa
         run: |
-          mpicc media_mpi.c -o media_mpi
+          mpicc atividade2.c -o atividade2
 
-      - name: Executar teste MPI
+      - name: Executar programa
         run: |
-          mpirun -np 4 ./media_mpi 1000
+          mpirun -np 4 ./atividade2 1000
