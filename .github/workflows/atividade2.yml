@@ -22,7 +22,7 @@ jobs:
       - name: Instalar MPI
         run: |
           sudo apt-get update
-          sudo apt-get install -y mpich
+          sudo apt-get install -y openmpi-bin libopenmpi-dev
 
       - name: Listar arquivos do repositório
         run: |
@@ -32,6 +32,52 @@ jobs:
         run: |
           mpicc atividade2.c -o atividade2
 
-      - name: Executar programa
+      # TESTE 1
+      - name: Teste com N=10 e 2 processos
         run: |
-          mpirun -np 4 ./atividade2 1000
+          mpirun --allow-run-as-root --oversubscribe -np 2 ./atividade2 10
+
+      # TESTE 2
+      - name: Teste com N=50 e 2 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 2 ./atividade2 50
+
+      # TESTE 3
+      - name: Teste com N=100 e 2 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 2 ./atividade2 100
+
+      # TESTE 4
+      - name: Teste com N=100 e 4 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 4 ./atividade2 100
+
+      # TESTE 5
+      - name: Teste com N=500 e 4 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 4 ./atividade2 500
+
+      # TESTE 6
+      - name: Teste com N=1000 e 4 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 4 ./atividade2 1000
+
+      # TESTE 7
+      - name: Teste com N=2000 e 4 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 4 ./atividade2 2000
+
+      # TESTE 8
+      - name: Teste com N=1000 e 6 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 6 ./atividade2 1000
+
+      # TESTE 9
+      - name: Teste com N=5000 e 8 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 8 ./atividade2 5000
+
+      # TESTE 10
+      - name: Teste com N=10000 e 10 processos
+        run: |
+          mpirun --allow-run-as-root --oversubscribe -np 10 ./atividade2 10000
